@@ -42,12 +42,13 @@ int main()
 
         for (auto &x: bodies)
         {
-            tree.CalcMovement (x, 1.0);
-            tree.BoundaryDetection (x);
+            tree.CalcMovement (x, 0.0001);
+            //tree.BoundaryDetection (x);
         }
 
         auto stop = std::chrono::high_resolution_clock::now ();
         auto duration = std::chrono::duration_cast<std::chrono::milliseconds> (stop - start);
+        tree.reset();
 
         std::cout << i << "\t" << middlecount.count () << "\t" << duration.count () << "\n";
     }

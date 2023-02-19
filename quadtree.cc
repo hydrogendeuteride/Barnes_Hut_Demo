@@ -51,6 +51,8 @@ void QuadTree::reset()
         stack1.pop ();
         stack2.push (tmp);
 
+        tmp->data.clear();
+
         if (tmp->q1 != nullptr)
             stack1.push (tmp->q1);
 
@@ -80,17 +82,11 @@ void QuadTree::addNodeIterative(std::vector<Body> &data, double w, double h)
 {
     std::queue<std::shared_ptr<Node>> queue;
 
-    if (root != nullptr)
-    {
-        root->HasLeaf = true;
-        queue.push (root);
-    }
-    else
-    {
+
         root = std::make_shared<Node> (data, w, h, 0, 0);
         root->HasLeaf = true;
         queue.push (root);
-    }
+
 
     while (!queue.empty ())
     {
