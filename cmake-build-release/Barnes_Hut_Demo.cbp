@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="Barnes_Hut_Demo"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\..\;CMake Files\..\..\..\..\..\..\;CMake Files\..\..\..\..\..\..\usr\;CMake Files\..\..\..\..\..\..\usr\share\;CMake Files\..\..\..\..\..\..\usr\share\eigen3\;CMake Files\..\..\..\..\..\..\usr\share\eigen3\cmake\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/mnt/c/Users/송국선/CLionProjects/Barnes_Hut_Demo/cmake-build-release"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j16 -f &quot;/mnt/c/Users/송국선/CLionProjects/Barnes_Hut_Demo/cmake-build-release/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/gmake -j16 -f &quot;/mnt/c/Users/송국선/CLionProjects/Barnes_Hut_Demo/cmake-build-release/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j16 -f &quot;/mnt/c/Users/송국선/CLionProjects/Barnes_Hut_Demo/cmake-build-release/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j16 -f &quot;/mnt/c/Users/송국선/CLionProjects/Barnes_Hut_Demo/cmake-build-release/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Barnes_Hut_Demo">
+				<Option output="/mnt/c/Users/송국선/CLionProjects/Barnes_Hut_Demo/cmake-build-release/Barnes_Hut_Demo" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/c/Users/송국선/CLionProjects/Barnes_Hut_Demo/cmake-build-release"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/11"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
+					<Add directory="/usr/include/c++/11/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j16 -f &quot;/mnt/c/Users/송국선/CLionProjects/Barnes_Hut_Demo/cmake-build-release/Makefile&quot;  VERBOSE=1 Barnes_Hut_Demo"/>
+					<CompileFile command="/usr/bin/gmake -j16 -f &quot;/mnt/c/Users/송국선/CLionProjects/Barnes_Hut_Demo/cmake-build-release/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j16 -f &quot;/mnt/c/Users/송국선/CLionProjects/Barnes_Hut_Demo/cmake-build-release/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j16 -f &quot;/mnt/c/Users/송국선/CLionProjects/Barnes_Hut_Demo/cmake-build-release/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Barnes_Hut_Demo/fast">
+				<Option output="/mnt/c/Users/송국선/CLionProjects/Barnes_Hut_Demo/cmake-build-release/Barnes_Hut_Demo" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/c/Users/송국선/CLionProjects/Barnes_Hut_Demo/cmake-build-release"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/11"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
+					<Add directory="/usr/include/c++/11/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j16 -f &quot;/mnt/c/Users/송국선/CLionProjects/Barnes_Hut_Demo/cmake-build-release/Makefile&quot;  VERBOSE=1 Barnes_Hut_Demo/fast"/>
+					<CompileFile command="/usr/bin/gmake -j16 -f &quot;/mnt/c/Users/송국선/CLionProjects/Barnes_Hut_Demo/cmake-build-release/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j16 -f &quot;/mnt/c/Users/송국선/CLionProjects/Barnes_Hut_Demo/cmake-build-release/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j16 -f &quot;/mnt/c/Users/송국선/CLionProjects/Barnes_Hut_Demo/cmake-build-release/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/mnt/c/Users/송국선/CLionProjects/Barnes_Hut_Demo/cmake-build-release"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j16 -f &quot;/mnt/c/Users/송국선/CLionProjects/Barnes_Hut_Demo/cmake-build-release/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/gmake -j16 -f &quot;/mnt/c/Users/송국선/CLionProjects/Barnes_Hut_Demo/cmake-build-release/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j16 -f &quot;/mnt/c/Users/송국선/CLionProjects/Barnes_Hut_Demo/cmake-build-release/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j16 -f &quot;/mnt/c/Users/송국선/CLionProjects/Barnes_Hut_Demo/cmake-build-release/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/mnt/c/Users/송국선/CLionProjects/Barnes_Hut_Demo/cmake-build-release"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j16 -f &quot;/mnt/c/Users/송국선/CLionProjects/Barnes_Hut_Demo/cmake-build-release/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/gmake -j16 -f &quot;/mnt/c/Users/송국선/CLionProjects/Barnes_Hut_Demo/cmake-build-release/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j16 -f &quot;/mnt/c/Users/송국선/CLionProjects/Barnes_Hut_Demo/cmake-build-release/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j16 -f &quot;/mnt/c/Users/송국선/CLionProjects/Barnes_Hut_Demo/cmake-build-release/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/mnt/c/Users/송국선/CLionProjects/Barnes_Hut_Demo/acceleration.h">
+			<Option target="Barnes_Hut_Demo"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/송국선/CLionProjects/Barnes_Hut_Demo/barnes_hut.cc">
+			<Option target="Barnes_Hut_Demo"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/송국선/CLionProjects/Barnes_Hut_Demo/barnes_hut.h">
+			<Option target="Barnes_Hut_Demo"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/송국선/CLionProjects/Barnes_Hut_Demo/main.cc">
+			<Option target="Barnes_Hut_Demo"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/송국선/CLionProjects/Barnes_Hut_Demo/numerics.h">
+			<Option target="Barnes_Hut_Demo"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/송국선/CLionProjects/Barnes_Hut_Demo/quadtree.cc">
+			<Option target="Barnes_Hut_Demo"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/송국선/CLionProjects/Barnes_Hut_Demo/quadtree.h">
+			<Option target="Barnes_Hut_Demo"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/송국선/CLionProjects/Barnes_Hut_Demo/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/송국선/CLionProjects/Barnes_Hut_Demo/../../../../../../usr/share/eigen3/cmake/Eigen3Config.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\usr\share\eigen3\cmake\"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/송국선/CLionProjects/Barnes_Hut_Demo/../../../../../../usr/share/eigen3/cmake/Eigen3ConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\usr\share\eigen3\cmake\"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/송국선/CLionProjects/Barnes_Hut_Demo/../../../../../../usr/share/eigen3/cmake/Eigen3Targets.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\usr\share\eigen3\cmake\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

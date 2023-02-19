@@ -1,0 +1,1 @@
+/usr/bin/c++ -g CMakeFiles/Barnes_Hut_Demo.dir/main.cc.o CMakeFiles/Barnes_Hut_Demo.dir/quadtree.cc.o CMakeFiles/Barnes_Hut_Demo.dir/barnes_hut.cc.o -o Barnes_Hut_Demo 

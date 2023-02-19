@@ -1,0 +1,4 @@
+C:\Windows\system32\wsl.exe --distribution Ubuntu-22.04 --exec /usr/bin/zsh -c "export CMAKE_COLOR_DIAGNOSTICS=ON && export CLION_IDE=TRUE && export JETBRAINS_IDE=TRUE && cd /mnt/c/Users/송국선/CLionProjects/Barnes_Hut_Demo/cmake-build-debug && /home/ellipse/cmake-3.24.2/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G 'CodeBlocks - Unix Makefiles' -S /mnt/c/Users/송국선/CLionProjects/Barnes_Hut_Demo -B /mnt/c/Users/송국선/CLionProjects/Barnes_Hut_Demo/cmake-build-debug"
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /mnt/c/Users/송국선/CLionProjects/Barnes_Hut_Demo/cmake-build-debug

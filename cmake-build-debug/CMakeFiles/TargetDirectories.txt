@@ -1,0 +1,3 @@
+/mnt/c/Users/송국선/CLionProjects/Barnes_Hut_Demo/cmake-build-debug/CMakeFiles/Barnes_Hut_Demo.dir
+/mnt/c/Users/송국선/CLionProjects/Barnes_Hut_Demo/cmake-build-debug/CMakeFiles/edit_cache.dir
+/mnt/c/Users/송국선/CLionProjects/Barnes_Hut_Demo/cmake-build-debug/CMakeFiles/rebuild_cache.dir

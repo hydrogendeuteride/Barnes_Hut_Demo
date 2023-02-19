@@ -5,7 +5,6 @@
 #include <eigen3/Eigen/Dense>
 #include <utility>
 #include <vector>
-#include <queue>
 #include <algorithm>
 #include <stack>
 #include <numeric>
@@ -32,9 +31,12 @@ struct Body
 
 class Node
 {
-public:
+protected:
     std::vector<Body> data;
 
+    bool Includes(const Body& body) const;
+
+public:
     std::shared_ptr<Node> q1;
     std::shared_ptr<Node> q2;
     std::shared_ptr<Node> q3;
@@ -48,24 +50,36 @@ public:
 
     bool HasLeaf = false;
 
-    Node(std::vector<Body> data, double w, double h);
+    Node(double w, double h);
+    Node(double w, double h, double BoxX, double BoxY);
 
-    Node(std::vector<Body> data, double w, double h, double BoxX, double BoxY);
+    bool Find(const Body& body);
 
-    bool contains(const Body& body);
+    void InsertData(const Body& body)
+    {
+        data.push_back (body);
+    }
+
+    int DataCount()
+    {
+        return data.size();
+    }
 };
 
-class QuadTree
+class QuadTree : public Node
 {
-public:
-    QuadTree() : root (nullptr)
-    {};
-
-    void addNodeIterative(std::vector<Body> &data, double w, double h);
-    void reset();
-
 protected:
     std::shared_ptr<Node> root;
+
+    void Insert(const std::shared_ptr<Node>& node, const Body& body);
+
+public:
+    QuadTree(double w, double h, double boxX, double boxY) : Node(w, h, boxX, boxY)
+    {
+        root = std::make_shared<Node>(w, h, boxX, boxY);
+    };
+
+    void Insert(const Body& body);
 };
 
 #endif //BARNES_HUT_DEMO_QUADTREE_H

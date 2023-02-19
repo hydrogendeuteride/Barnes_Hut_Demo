@@ -11,6 +11,9 @@ constexpr double THETA = 0.5;
 class BarnesHutTree : public QuadTree
 {
 private:
+    BarnesHutTree()
+    {}
+
     vec2 NetAcceleration(Body &leaf);
 
     Acceleration::Gravitational gravity;
