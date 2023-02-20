@@ -38,19 +38,19 @@ int main()
         tree.addNodeIterative (bodies, 50, 50);
 
         auto middle = std::chrono::high_resolution_clock::now ();
-        auto middlecount = std::chrono::duration_cast<std::chrono::milliseconds> (middle - start);
+        auto treegen = std::chrono::duration_cast<std::chrono::milliseconds> (middle - start);
 
         for (auto &x: bodies)
         {
             tree.CalcMovement (x, 0.0001);
-            //tree.BoundaryDetection (x);
+            tree.BoundaryDetection (x);
         }
 
         auto stop = std::chrono::high_resolution_clock::now ();
         auto duration = std::chrono::duration_cast<std::chrono::milliseconds> (stop - start);
         tree.reset();
 
-        std::cout << i << "\t" << middlecount.count () << "\t" << duration.count () << "\n";
+        std::cout << i << "\t" << treegen.count () << "\t" << duration.count () << "\n";
     }
 
     return 0;
