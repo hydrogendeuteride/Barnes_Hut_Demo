@@ -15,19 +15,19 @@ namespace Object
         std::vector<sf::Vertex> Points;
 
     public:
-        Particles(const std::vector<vec2> &pos)
+        explicit Particles(const std::vector<Body>& pos)
         {
             for (const auto &x: pos)
-                Points.emplace_back (sf::Vector2f (static_cast<float>(x (0)), static_cast<float>(x (1))),
+                Points.emplace_back (sf::Vector2f (static_cast<float>(x.pos (0)), static_cast<float>(x.pos (1))),
                                      sf::Color::White);
         };
 
-        void Update(const std::vector<vec2> &pos)
+        void Update(const std::vector<Body> &pos)
         {
             for (unsigned int i = 0; i < Points.size (); ++i)
             {
-                Points.at (i).position = sf::Vector2f (static_cast<float>(pos.at (i) (0)),
-                                                       static_cast<float>(pos.at (i) (1)));
+                Points.at (i).position = sf::Vector2f (static_cast<float>(pos.at (i).pos (0)),
+                                                       static_cast<float>(pos.at (i).pos (1)));
             }
         }
 
@@ -35,6 +35,30 @@ namespace Object
         {
             for (const auto &x: Points)
                 window->draw (&x, 1, sf::Points);
+        }
+    };
+}
+
+namespace Event
+{
+    class View
+    {
+    private:
+        sf::View view;
+
+    public:
+        View(sf::RenderWindow* window, float SimWidth, float SimHeight, float ScreenWidth, float ScreenHeight)
+        {
+            view = sf::View(sf::FloatRect (SimWidth / 2 - ScreenWidth / 2,
+                                           SimHeight / 2 - ScreenHeight / 2,
+                                           ScreenWidth, ScreenHeight));
+            window->setView (view);
+            view.zoom (0.01);
+        }
+
+        void ViewTrsnsform(sf::Event* event)
+        {
+
         }
     };
 }

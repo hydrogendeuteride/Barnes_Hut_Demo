@@ -2,6 +2,7 @@
 #include <random>
 #include <chrono>
 #include "barnes_hut.h"
+#include "Drawable.h"
 
 void postorder(const std::shared_ptr<Node> &Node)
 {
@@ -31,8 +32,24 @@ int main()
 
     BarnesHutTree tree = BarnesHutTree ();
 
-    for (int i = 0; i < 20; ++i)
+    sf::RenderWindow window(sf::VideoMode(1920, 1080), "Barnes-Hut");
+    window.setVerticalSyncEnabled (true);
+
+    Object::Particles particles(bodies);
+
+    while (window.isOpen())
     {
+        sf::Event event{};
+        while (window.pollEvent (event))
+        {
+            if (event.type == sf::Event::Closed)
+            {
+                if (event.type == sf::Event::Closed)
+                    window.close();
+            }
+        }
+        window.clear();
+
         auto start = std::chrono::high_resolution_clock::now ();
 
         tree.addNodeIterative (bodies, 50, 50);
@@ -48,9 +65,13 @@ int main()
 
         auto stop = std::chrono::high_resolution_clock::now ();
         auto duration = std::chrono::duration_cast<std::chrono::milliseconds> (stop - start);
+
+        particles.Update (bodies);
+        particles.Draw (&window);
+
         tree.reset();
 
-        std::cout << i << "\t" << treegen.count () << "\t" << duration.count () << "\n";
+        //std::cout << i << "\t" << treegen.count () << "\t" << duration.count () << "\n";
     }
 
     return 0;
