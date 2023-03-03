@@ -45,6 +45,7 @@ namespace Event
     {
     private:
         sf::View view;
+        float zoom = 1.0;
 
     public:
         View(sf::RenderWindow* window, float SimWidth, float SimHeight, float ScreenWidth, float ScreenHeight)
@@ -58,7 +59,11 @@ namespace Event
 
         void ViewTrsnsform(sf::Event* event)
         {
-
+            if (event->type == sf::Event::MouseWheelScrolled)
+            {
+                zoom *= 1 + (static_cast<float>(-event->mouseWheelScroll.delta) / 10);
+                view.zoom (1 + static_cast<float>(-event->mouseWheelScroll.delta) / 10);
+            }
         }
     };
 }

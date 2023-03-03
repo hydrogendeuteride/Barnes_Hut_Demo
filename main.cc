@@ -1,8 +1,11 @@
-#include <iostream>
 #include <random>
+#include <iostream>
 #include <chrono>
 #include "barnes_hut.h"
 #include "Drawable.h"
+
+constexpr double SimWidth = 32768;
+constexpr double SimHeight = 32768;
 
 void postorder(const std::shared_ptr<Node> &Node)
 {
@@ -21,23 +24,23 @@ int main()
 {
     std::random_device rand;
     std::mt19937 gen (rand ());
-    std::uniform_real_distribution<> dist (0.0, 10.0);
-    std::uniform_real_distribution<> mass (1.0, 2.0);
+    std::uniform_real_distribution<> dist (200.0, 800.0);
+    std::uniform_real_distribution<> mass (5.0, 20.0);
 
     std::vector<Body> bodies;
-    for (int i = 0; i < 1000; ++i)
+    for (int i = 0; i < 500; ++i)
         bodies.emplace_back (vec2 (dist (gen), dist (gen)),
-                             vec2 (dist (gen), dist (gen)),
+                             vec2 (0.0, 0.0),
                              mass (gen));
 
     BarnesHutTree tree = BarnesHutTree ();
 
-    sf::RenderWindow window(sf::VideoMode(1920, 1080), "Barnes-Hut");
+    sf::RenderWindow window (sf::VideoMode (1920, 1080), "Barnes-Hut");
     window.setVerticalSyncEnabled (true);
 
-    Object::Particles particles(bodies);
+    Object::Particles particles (bodies);
 
-    while (window.isOpen())
+    while (window.isOpen ())
     {
         sf::Event event{};
         while (window.pollEvent (event))
@@ -45,21 +48,23 @@ int main()
             if (event.type == sf::Event::Closed)
             {
                 if (event.type == sf::Event::Closed)
-                    window.close();
+                    window.close ();
             }
+
+
         }
-        window.clear();
+        window.clear ();
 
         auto start = std::chrono::high_resolution_clock::now ();
 
-        tree.addNodeIterative (bodies, 50, 50);
+        tree.addNodeIterative (bodies, 1000, 1000);
 
         auto middle = std::chrono::high_resolution_clock::now ();
         auto treegen = std::chrono::duration_cast<std::chrono::milliseconds> (middle - start);
 
         for (auto &x: bodies)
         {
-            tree.CalcMovement (x, 0.0001);
+            tree.CalcMovement (x, 0.01);
             tree.BoundaryDetection (x);
         }
 
@@ -69,9 +74,10 @@ int main()
         particles.Update (bodies);
         particles.Draw (&window);
 
-        tree.reset();
+        tree.reset ();
 
-        //std::cout << i << "\t" << treegen.count () << "\t" << duration.count () << "\n";
+        window.display ();
+        std::cout << "\t" << treegen.count () << "\t" << duration.count () << "\n";
     }
 
     return 0;

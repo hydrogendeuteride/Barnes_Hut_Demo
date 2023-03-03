@@ -37,13 +37,13 @@ vec2 BarnesHutTree::NetAcceleration(Body &leaf)
 
 void BarnesHutTree::BoundaryDetection(Body &body)
 {
-    if ((body.pos(0) > root->width && body.vel(0) > 0) ||
-        (body.pos(0) < 0 && body.vel(0) < 0))
-        body.pos(0) = -body.pos(0);
+    if ((body.pos (0) > root->width && body.vel (0) > 0) ||
+        (body.pos (0) < 0 && body.vel (0) < 0))
+        body.vel (0) = -body.vel (0);
 
-    if ((body.pos(1) > root->height && body.vel(1) > 0) ||
-        (body.pos(1) < 0 && body.vel(1) < 0))
-        body.pos(1) = -body.pos(1);
+    if ((body.pos (1) > root->height && body.vel (1) > 0) ||
+        (body.pos (1) < 0 && body.vel (1) < 0))
+        body.vel (1) = -body.vel (1);
 }
 
 void BarnesHutTree::CalcMovement(Body &body, double timestep)
