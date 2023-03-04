@@ -4,9 +4,6 @@
 #include "barnes_hut.h"
 #include "Drawable.h"
 
-constexpr double SimWidth = 32768;
-constexpr double SimHeight = 32768;
-
 void postorder(const std::shared_ptr<Node> &Node)
 {
     if (Node == nullptr)
@@ -18,6 +15,11 @@ void postorder(const std::shared_ptr<Node> &Node)
     postorder (Node->q4);
 
     std::cout << Node->width << " " << Node->height << " " << Node->data.size () << std::endl;
+}
+
+void DiskDistribution(std::vector<Body>& bodies, int numbe)
+{
+
 }
 
 int main()
@@ -38,6 +40,8 @@ int main()
     sf::RenderWindow window (sf::VideoMode (1920, 1080), "Barnes-Hut");
     window.setVerticalSyncEnabled (true);
 
+    Event::View view(&window, 1000, 1000, 1920, 1080);
+
     Object::Particles particles (bodies);
 
     while (window.isOpen ())
@@ -51,7 +55,7 @@ int main()
                     window.close ();
             }
 
-
+            view.ViewTrsnsform(&window, &event);
         }
         window.clear ();
 

@@ -4,9 +4,7 @@
 #include "quadtree.h"
 #include "numerics.h"
 #include "acceleration.h"
-
-constexpr double SOFTENER = 5.0;
-constexpr double THETA = 0.5;
+#include "constants.h"
 
 class BarnesHutTree : public QuadTree
 {

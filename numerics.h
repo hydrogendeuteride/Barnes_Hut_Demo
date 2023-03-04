@@ -5,7 +5,6 @@
 #include <tuple>
 
 typedef Eigen::Vector2d vec2;
-constexpr double GRAVITY_CONST = 0.5;
 
 namespace Integrator
 {

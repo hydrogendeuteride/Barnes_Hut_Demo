@@ -54,15 +54,16 @@ namespace Event
                                            SimHeight / 2 - ScreenHeight / 2,
                                            ScreenWidth, ScreenHeight));
             window->setView (view);
-            view.zoom (0.01);
+            view.zoom (1.0);
         }
 
-        void ViewTrsnsform(sf::Event* event)
+        void ViewTrsnsform(sf::RenderWindow* window, sf::Event* event)
         {
             if (event->type == sf::Event::MouseWheelScrolled)
             {
                 zoom *= 1 + (static_cast<float>(-event->mouseWheelScroll.delta) / 10);
                 view.zoom (1 + static_cast<float>(-event->mouseWheelScroll.delta) / 10);
+                window->setView (view);
             }
         }
     };

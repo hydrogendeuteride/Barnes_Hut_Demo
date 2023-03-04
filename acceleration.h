@@ -2,6 +2,7 @@
 #define BARNES_HUT_DEMO_ACCELERATION_H
 
 #include <eigen3/Eigen/Dense>
+#include "constants.h"
 
 typedef Eigen::Vector2d vec2;
 
@@ -12,7 +13,10 @@ namespace Acceleration
     public:
         vec2 operator()(const double LeafMass, const double RootMass, const vec2 &dist)
         {
-            return -(GRAVITY_CONST * LeafMass * RootMass) / (std::pow (dist.norm (), 3)) * dist;
+            double norm = dist.norm ();
+
+            return -(GRAVITY_CONST * LeafMass * RootMass)
+                   / (std::pow ((norm * norm) + (EPSILON * EPSILON), 1.5)) * dist;
         }
     };
 }
