@@ -53,8 +53,8 @@ namespace Event
             view = sf::View(sf::FloatRect (SimWidth / 2 - ScreenWidth / 2,
                                            SimHeight / 2 - ScreenHeight / 2,
                                            ScreenWidth, ScreenHeight));
+            view.zoom (50.0);
             window->setView (view);
-            view.zoom (1.0);
         }
 
         void ViewTrsnsform(sf::RenderWindow* window, sf::Event* event)
