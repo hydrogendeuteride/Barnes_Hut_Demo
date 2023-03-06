@@ -30,7 +30,7 @@ void DiskDistribution(
 
     bodies.emplace_back(vec2(SimWidth / 2.0, SimHeight / 2.0), vec2(0.0, 0.0), centermass);
 
-    for (int i = 0; i < number; ++i)
+    for (int i = 1; i < number; ++i)
     {
         double angle = rand_angle (gen);
         double distance = rand_dist (gen);
