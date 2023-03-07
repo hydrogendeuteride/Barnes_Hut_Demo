@@ -49,17 +49,8 @@ void DiskDistribution(
 
 int main()
 {
-    /*std::random_device rand;
-    std::mt19937 gen (rand ());
-    std::uniform_real_distribution<> dist (200.0, 800.0);
-    std::uniform_real_distribution<> mass (5.0, 20.0);
-*/
     std::vector<Body> bodies;
-    /*  for (int i = 0; i < 500; ++i)
-          bodies.emplace_back (vec2 (dist (gen), dist (gen)),
-                               vec2 (0.0, 0.0),
-                               mass (gen));
-  */
+
     DiskDistribution (bodies, 1000, 20000, 50, 1, 2, 1000000);
 
     BarnesHutTree tree = BarnesHutTree ();
