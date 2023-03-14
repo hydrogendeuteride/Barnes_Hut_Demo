@@ -4,6 +4,7 @@
 #include "barnes_hut.h"
 #include "Drawable.h"
 #include <cmath>
+#include <omp.h>
 
 void postorder(const std::shared_ptr<Node> &Node)
 {
@@ -84,10 +85,11 @@ int main()
         auto middle = std::chrono::high_resolution_clock::now ();
         auto treegen = std::chrono::duration_cast<std::chrono::milliseconds> (middle - start);
 
-        for (auto &x: bodies)
+        #pragma omp parallel for num_threads(omp_get_max_threads())
+        for (size_t i = 0; i < bodies.size(); ++i)
         {
-            tree.CalcMovement (x, 10.0);
-            tree.BoundaryDetection (x);
+            tree.CalcMovement (bodies.at(i), 1.0);
+            tree.BoundaryDetection (bodies.at(i));
         }
 
         auto stop = std::chrono::high_resolution_clock::now ();
