@@ -4,7 +4,7 @@
 Node::Node(std::vector<Body> data, double w, double h)
         : data (std::move (data)), width (w), height (h)
 {
-    TotalMass = std::accumulate (this->data.begin (), this->data.end (), 0,
+    TotalMass = std::accumulate (this->data.begin (), this->data.end (), 0.0,
                                  [](double sum, const auto &x) { return sum + x.mass; });
 
     CenterOfMass = std::accumulate (this->data.begin (), this->data.end (), vec2 (0.0, 0.0),
@@ -14,7 +14,7 @@ Node::Node(std::vector<Body> data, double w, double h)
 Node::Node(std::vector<Body> data, double w, double h, double BoxX, double BoxY)
         : data (std::move (data)), width (w), height (h), BoxPosX (BoxX), BoxPosY (BoxY)
 {
-    TotalMass = std::accumulate (this->data.begin (), this->data.end (), 0,
+    TotalMass = std::accumulate (this->data.begin (), this->data.end (), 0.0,
                                  [](double sum, const auto &x) { return sum + x.mass; });
 
     CenterOfMass = std::accumulate (this->data.begin (), this->data.end (), vec2 (0.0, 0.0),
@@ -23,11 +23,7 @@ Node::Node(std::vector<Body> data, double w, double h, double BoxX, double BoxY)
 
 bool Node::contains(const Body &body)
 {
-
-    if (std::find (this->data.begin (), this->data.end (), body) == this->data.end ())
-        return false;
-    else
-        return true;
+    return std::find(this->data.begin(), this->data.end(), body) != this->data.end();
 }
 
 void QuadTree::reset()
@@ -72,7 +68,6 @@ void QuadTree::reset()
         stack2.pop();
 
         tmp->HasLeaf = false;
-        tmp.reset();
     }
 
     root.reset();
@@ -101,16 +96,16 @@ void QuadTree::addNodeIterative(std::vector<Body> &data, double w, double h)
             if (body1.pos (0, 0) < (tmp->BoxPosX + (tmp->width / 2.0)))
             {
                 if (body1.pos (1, 0) < (tmp->BoxPosY) + (tmp->height / 2.0))
-                    q1.push_back (body1);
+                    q1.emplace_back (body1);
                 else
-                    q3.push_back (body1);
+                    q3.emplace_back (body1);
             }
             else
             {
                 if (body1.pos (1, 0) < (tmp->BoxPosY) + (tmp->height / 2.0))
-                    q2.push_back (body1);
+                    q2.emplace_back (body1);
                 else
-                    q4.push_back (body1);
+                    q4.emplace_back (body1);
             }
         }
         /*

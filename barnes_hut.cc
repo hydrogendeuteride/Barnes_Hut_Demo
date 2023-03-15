@@ -4,13 +4,13 @@ vec2 BarnesHutTree::NetAcceleration(Body &leaf)
 {
     vec2 NetAcc = vec2 (0.0, 0.0);
 
-    std::queue<std::shared_ptr<Node>> queue;
-    queue.push (root);
+    std::stack<std::shared_ptr<Node>> stack;
+    stack.push (root);
 
-    while (!queue.empty ())
+    while (!stack.empty ())
     {
-        std::shared_ptr<Node> tmp = queue.front ();
-        queue.pop ();
+        auto tmp = stack.top ();
+        stack.pop ();
 
         vec2 Dist_V = leaf.pos - tmp->CenterOfMass;
         double Dist = Dist_V.norm ();
@@ -20,16 +20,16 @@ vec2 BarnesHutTree::NetAcceleration(Body &leaf)
                 NetAcc += gravity (tmp->TotalMass, Dist_V);
 
         if (tmp->q1 != nullptr)
-            queue.push (tmp->q1);
+            stack.push (tmp->q1);
 
         if (tmp->q2 != nullptr)
-            queue.push (tmp->q2);
+            stack.push (tmp->q2);
 
         if (tmp->q3 != nullptr)
-            queue.push (tmp->q3);
+            stack.push (tmp->q3);
 
         if (tmp->q4 != nullptr)
-            queue.push (tmp->q4);
+            stack.push (tmp->q4);
     }
 
     return NetAcc;
