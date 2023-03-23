@@ -11,12 +11,12 @@ namespace Acceleration
     class Gravitational
     {
     public:
-        vec2 operator()( const double RootMass, const vec2 &dist)
+        vec2 operator()(const double RootMass, const vec2 &dist)
         {
-            double norm = dist.norm ();
+            double norm = dist.norm();
 
             return -(GRAVITY_CONST * RootMass)
-                   / (std::pow ((norm * norm) + (EPSILON * EPSILON), 1.5)) * dist;
+                   / (std::pow((norm * norm) + (EPSILON * EPSILON), 1.5)) * dist;
         }
     };
 }

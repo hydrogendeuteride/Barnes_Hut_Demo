@@ -18,23 +18,23 @@ namespace Object
         explicit Particles(const std::vector<Body> &pos)
         {
             for (const auto &x: pos)
-                Points.emplace_back (sf::Vector2f (static_cast<float>(x.pos (0)), static_cast<float>(x.pos (1))),
-                                     sf::Color::White);
+                Points.emplace_back(sf::Vector2f(static_cast<float>(x.pos(0)), static_cast<float>(x.pos(1))),
+                                    sf::Color::White);
         };
 
         void Update(const std::vector<Body> &pos)
         {
-            for (unsigned int i = 0; i < Points.size (); ++i)
+            for (unsigned int i = 0; i < Points.size(); ++i)
             {
-                Points.at (i).position = sf::Vector2f (static_cast<float>(pos.at (i).pos (0)),
-                                                       static_cast<float>(pos.at (i).pos (1)));
+                Points.at(i).position = sf::Vector2f(static_cast<float>(pos.at(i).pos(0)),
+                                                     static_cast<float>(pos.at(i).pos(1)));
             }
         }
 
         void Draw(sf::RenderWindow *window)
         {
             for (const auto &x: Points)
-                window->draw (&x, 1, sf::Points);
+                window->draw(&x, 1, sf::Points);
         }
     };
 }
@@ -50,12 +50,12 @@ namespace Event
     public:
         View(sf::RenderWindow *window, float SimWidth, float SimHeight, float ScreenWidth, float ScreenHeight)
         {
-            view = sf::View (sf::FloatRect (SimWidth / 2 - ScreenWidth / 2,
-                                            SimHeight / 2 - ScreenHeight / 2,
-                                            ScreenWidth, ScreenHeight));
-            view.zoom (50.0);
+            view = sf::View(sf::FloatRect(SimWidth / 2 - ScreenWidth / 2,
+                                          SimHeight / 2 - ScreenHeight / 2,
+                                          ScreenWidth, ScreenHeight));
+            view.zoom(50.0);
             zoom = 50.0;
-            window->setView (view);
+            window->setView(view);
         }
 
         void ViewTrsnsform(sf::RenderWindow *window, sf::Event *event)
@@ -63,25 +63,25 @@ namespace Event
             if (event->type == sf::Event::MouseWheelScrolled)
             {
                 zoom *= 1 + (static_cast<float>(-event->mouseWheelScroll.delta) / 10);
-                view.zoom (1 + static_cast<float>(-event->mouseWheelScroll.delta) / 10);
+                view.zoom(1 + static_cast<float>(-event->mouseWheelScroll.delta) / 10);
             }
 
             if (event->type == sf::Event::KeyPressed)
             {
                 if (event->key.code == sf::Keyboard::Left)
-                    view.move (-15 * zoom, 0);
+                    view.move(-15 * zoom, 0);
 
                 if (event->key.code == sf::Keyboard::Right)
-                    view.move (15 * zoom, 0);
+                    view.move(15 * zoom, 0);
 
                 if (event->key.code == sf::Keyboard::Up)
-                    view.move (0, -15 * zoom);
+                    view.move(0, -15 * zoom);
 
                 if (event->key.code == sf::Keyboard::Down)
-                    view.move (0, 15 * zoom);
+                    view.move(0, 15 * zoom);
             }
 
-            window->setView (view);
+            window->setView(view);
         }
     };
 }

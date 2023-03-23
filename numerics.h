@@ -16,12 +16,12 @@ namespace Integrator
                 const vec2 &accel, const double timestep)
         {
             auto [x, v] = Pos_Vel;
-            vec2 x_1 (0.0, 0.0), v_1 (0.0, 0.0);
+            vec2 x_1(0.0, 0.0), v_1(0.0, 0.0);
 
             v_1 = v + accel * timestep;
             x_1 = x + v_1 * timestep;
 
-            return std::make_tuple (x_1, v_1);
+            return std::make_tuple(x_1, v_1);
         }
     };
 }

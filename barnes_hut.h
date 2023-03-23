@@ -11,11 +11,12 @@ class BarnesHutTree : public QuadTree
 private:
     vec2 NetAcceleration(Body &leaf);
 
-    Acceleration::Gravitational gravity;
+    Acceleration::Gravitational Gravity;
 
 public:
     void CalcMovement(Body &body, double timestep);
-    void BoundaryDetection(Body& body);
+
+    void BoundaryDetection(Body &body);
 };
 
 #endif //BARNES_HUT_DEMO_BARNES_HUT_H
