@@ -13,13 +13,13 @@ namespace Integrator
     public:
         std::tuple<vec2, vec2> operator()(
                 const std::tuple<vec2, vec2> &Pos_Vel,
-                const vec2 &accel, const double timestep)
+                const vec2 &accel, const double dt)
         {
             auto [x, v] = Pos_Vel;
             vec2 x_1(0.0, 0.0), v_1(0.0, 0.0);
 
-            v_1 = v + accel * timestep;
-            x_1 = x + v_1 * timestep;
+            v_1 = v + accel * dt;
+            x_1 = x + v_1 * dt;
 
             return std::make_tuple(x_1, v_1);
         }

@@ -46,13 +46,13 @@ void BarnesHutTree::BoundaryDetection(Body &body)
         body.vel(1) = -body.vel(1);
 }
 
-void BarnesHutTree::CalcMovement(Body &body, double timestep)
+void BarnesHutTree::CalcMovement(Body &body, double dt)
 {
     Integrator::Semi_Implicit_Euler euler;
 
     auto [x, v] =
             euler(std::make_tuple(body.pos, body.vel),
-                  NetAcceleration(body), timestep);
+                  NetAcceleration(body), dt);
 
     body.pos = x, body.vel = v;
 }

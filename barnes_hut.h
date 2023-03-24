@@ -14,7 +14,7 @@ private:
     Acceleration::Gravitational Gravity;
 
 public:
-    void CalcMovement(Body &body, double timestep);
+    void CalcMovement(Body &body, double dt);
 
     void BoundaryDetection(Body &body);
 };
