@@ -38,6 +38,7 @@ int main()
     Event::View view(&window, SimWidth, SimHeight, ViewWidth, ViewHeight);
 
     Object::Particles particles(bodies);
+    Integrator::Semi_Implicit_Euler euler;
 
     while (window.isOpen())
     {
@@ -65,7 +66,7 @@ int main()
 #pragma omp parallel for num_threads(omp_get_max_threads())
         for (size_t i = 0; i < bodies.size(); ++i)
         {
-            tree.CalcMovement(bodies.at(i), 1.0);
+            tree.CalcMovement(euler, bodies.at(i), 1.0);
             tree.BoundaryDetection(bodies.at(i));
         }
 

@@ -5,6 +5,7 @@
 #include "numerics.h"
 #include "acceleration.h"
 #include "constants.h"
+#include <functional>
 
 class BarnesHutTree : public QuadTree
 {
@@ -14,7 +15,9 @@ private:
     Acceleration::Gravitational Gravity;
 
 public:
-    void CalcMovement(Body &body, double dt);
+    void CalcMovement(const std::function<std::tuple<vec2, vec2>
+            (const std::tuple<vec2, vec2> &Pos_Vel,
+             const vec2 &accel, const double dt)>& Int, Body &body, double dt);
 
     void BoundaryDetection(Body &body);
 };
