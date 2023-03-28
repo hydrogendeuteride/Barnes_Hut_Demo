@@ -25,7 +25,7 @@ namespace Integrator
         }
     };
 
-    class Verlet
+    class Stormer_Verlet
     {
     public:
         std::tuple<vec2, vec2> operator()(

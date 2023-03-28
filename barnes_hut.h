@@ -20,6 +20,9 @@ public:
              const vec2 &accel, const double dt)>& Int, Body &body, double dt);
 
     void BoundaryDetection(Body &body);
+    std::shared_ptr<Node> GetRoot();
 };
+
+vec2 NetAcceleration(Body &leaf, const std::shared_ptr<Node>& Root);
 
 #endif //BARNES_HUT_DEMO_BARNES_HUT_H

@@ -56,3 +56,44 @@ void BarnesHutTree::CalcMovement(const std::function<std::tuple<vec2, vec2>
 
     body.pos = x, body.vel = v;
 }
+
+std::shared_ptr<Node> BarnesHutTree::GetRoot()
+{
+    return this->Root;
+}
+
+vec2 NetAcceleration(Body &leaf, const std::shared_ptr<Node>& Root)
+{
+    Acceleration::Gravitational Gravity;
+    vec2 NetAcc = vec2(0.0, 0.0);
+
+    std::stack<std::shared_ptr<Node>> stack;
+    stack.push(Root);
+
+    while (!stack.empty())
+    {
+        auto tmp = stack.top();
+        stack.pop();
+
+        vec2 Dist_V = leaf.pos - tmp->CenterOfMass;
+        double Dist = Dist_V.norm();
+
+        if (tmp->Width / Dist <= THETA || !tmp->HasLeaf)
+            if (!tmp->Contains(leaf))
+                NetAcc += Gravity(tmp->TotalMass, Dist_V);
+
+        if (tmp->q1 != nullptr)
+            stack.push(tmp->q1);
+
+        if (tmp->q2 != nullptr)
+            stack.push(tmp->q2);
+
+        if (tmp->q3 != nullptr)
+            stack.push(tmp->q3);
+
+        if (tmp->q4 != nullptr)
+            stack.push(tmp->q4);
+    }
+
+    return NetAcc;
+}
