@@ -56,6 +56,24 @@ void BarnesHutTree::CalcMovement(Body &body, double dt)
 
     body.pos = x, body.vel = v;
 */
+    Integrator::Verlet_First first;
+    Integrator::Verlet_Last Last;
+
+    vec2 accel = NetAcceleration(body);
+    auto [x, v] =
+            first(std::make_tuple(body.pos, body.vel),
+                  NetAcceleration(body), dt);
+
+    body.pos = x, body.vel = v;
+
+    vec2 accel_1 = NetAcceleration(body);
+    auto [x_1, v_1] =
+            Last(std::make_tuple(body.pos, body.vel),
+                  accel + accel_1, dt);
+
+    body.pos = x_1, body.vel = v_1;
+
+    /*
     vec2 x = body.pos, v = body.vel, a = NetAcceleration(body);
     vec2 x_1(0.0, 0.0), v_1(0.0, 0.0), a_1(0.0, 0.0);
     x_1 = x + v * dt + 0.5 * a * dt * dt;
@@ -65,4 +83,5 @@ void BarnesHutTree::CalcMovement(Body &body, double dt)
     v_1 = v + 0.5 * (a + a_1) * dt;
 
     body.pos = x_1, body.vel = v_1;
+*/
 }
