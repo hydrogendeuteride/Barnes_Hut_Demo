@@ -46,54 +46,23 @@ void BarnesHutTree::BoundaryDetection(Body &body)
         body.vel(1) = -body.vel(1);
 }
 
-void BarnesHutTree::CalcMovement(const std::function<std::tuple<vec2, vec2>
-        (const std::tuple<vec2, vec2> &Pos_Vel,
-         const vec2 &accel, const double dt)>& Int, Body &body, double dt)
-{
+void BarnesHutTree::CalcMovement(Body &body, double dt)
+{/*
+    Integrator::Semi_Implicit_Euler euler;
+
     auto [x, v] =
-            Int(std::make_tuple(body.pos, body.vel),
-                       NetAcceleration(body), dt);
+            euler(std::make_tuple(body.pos, body.vel),
+                  NetAcceleration(body), dt);
 
     body.pos = x, body.vel = v;
-}
+*/
+    vec2 x = body.pos, v = body.vel, a = NetAcceleration(body);
+    vec2 x_1(0.0, 0.0), v_1(0.0, 0.0), a_1(0.0, 0.0);
+    x_1 = x + v * dt + 0.5 * a * dt * dt;
 
-std::shared_ptr<Node> BarnesHutTree::GetRoot()
-{
-    return this->Root;
-}
+    body.pos = x_1;
+    a_1 = NetAcceleration(body);
+    v_1 = v + 0.5 * (a + a_1) * dt;
 
-vec2 NetAcceleration(Body &leaf, const std::shared_ptr<Node>& Root)
-{
-    Acceleration::Gravitational Gravity;
-    vec2 NetAcc = vec2(0.0, 0.0);
-
-    std::stack<std::shared_ptr<Node>> stack;
-    stack.push(Root);
-
-    while (!stack.empty())
-    {
-        auto tmp = stack.top();
-        stack.pop();
-
-        vec2 Dist_V = leaf.pos - tmp->CenterOfMass;
-        double Dist = Dist_V.norm();
-
-        if (tmp->Width / Dist <= THETA || !tmp->HasLeaf)
-            if (!tmp->Contains(leaf))
-                NetAcc += Gravity(tmp->TotalMass, Dist_V);
-
-        if (tmp->q1 != nullptr)
-            stack.push(tmp->q1);
-
-        if (tmp->q2 != nullptr)
-            stack.push(tmp->q2);
-
-        if (tmp->q3 != nullptr)
-            stack.push(tmp->q3);
-
-        if (tmp->q4 != nullptr)
-            stack.push(tmp->q4);
-    }
-
-    return NetAcc;
+    body.pos = x_1, body.vel = v_1;
 }

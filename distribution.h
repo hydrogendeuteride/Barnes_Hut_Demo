@@ -18,8 +18,8 @@ void DiskDistribution(
     {
         double angle = rand_angle(gen);
         double distance = rand_dist(gen);
-        double pos_x = std::cos(angle) * distance + (ViewWidth / 2.0);
-        double pos_y = std::sin(angle) * distance + (ViewHeight / 2.0);
+        double pos_x = std::cos(angle) * distance + (SimWidth / 2.0);
+        double pos_y = std::sin(angle) * distance + (SimHeight / 2.0);
 
         double velocity = std::pow(centermass * GRAVITY_CONST / distance, 0.5);
         double vel_x = std::sin(angle) * velocity;

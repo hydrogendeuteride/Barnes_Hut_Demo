@@ -25,7 +25,7 @@ int main()
 {
     std::vector<Body> bodies;
 
-    //DiskDistribution (bodies, 1000, 20000, 50, 1, 2, 1000000);
+    //DiskDistribution (bodies, 1000, 20000, 50, 1, 2, 1e8);
     PlummerDistribution(bodies, 1000, 10,
                         SimWidth / 2.0, SimHeight / 2.0);
 
@@ -38,7 +38,6 @@ int main()
     Event::View view(&window, SimWidth, SimHeight, ViewWidth, ViewHeight);
 
     Object::Particles particles(bodies);
-    Integrator::Semi_Implicit_Euler euler;
 
     while (window.isOpen())
     {
@@ -66,7 +65,7 @@ int main()
 #pragma omp parallel for num_threads(omp_get_max_threads())
         for (size_t i = 0; i < bodies.size(); ++i)
         {
-            tree.CalcMovement(euler, bodies.at(i), 1.0);
+            tree.CalcMovement(bodies.at(i), 0.5);
             tree.BoundaryDetection(bodies.at(i));
         }
 
