@@ -17,7 +17,7 @@ private:
 public:
     void CalcMovement(Body &body, double dt);
 
-    void BoundaryDetection(Body &body);
+    void BoundaryDetection(Body &body, int Int_type);
 };
 
 

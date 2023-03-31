@@ -66,7 +66,7 @@ int main()
         for (size_t i = 0; i < bodies.size(); ++i)
         {
             tree.CalcMovement(bodies.at(i), 1.0);
-            tree.BoundaryDetection(bodies.at(i));
+            tree.BoundaryDetection(bodies.at(i), 2);
         }
 
         auto stop = std::chrono::high_resolution_clock::now();
