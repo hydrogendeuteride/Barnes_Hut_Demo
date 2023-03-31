@@ -65,8 +65,8 @@ int main()
 #pragma omp parallel for num_threads(omp_get_max_threads())
         for (size_t i = 0; i < bodies.size(); ++i)
         {
-            tree.CalcMovement(bodies.at(i), 1.0);
-            tree.BoundaryDetection(bodies.at(i), 2);
+            tree.CalcMovement(bodies.at(i), 1.0, 2);
+            tree.BoundaryDetection(bodies.at(i));
         }
 
         auto stop = std::chrono::high_resolution_clock::now();
