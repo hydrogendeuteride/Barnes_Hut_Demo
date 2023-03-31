@@ -165,3 +165,8 @@ void QuadTree::AddNodeIterative(std::vector<Body> &Data, double w, double h)
         }
     }
 }
+
+const std::shared_ptr<Node>& QuadTree::GetRoot()
+{
+    return this->Root;
+}

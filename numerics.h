@@ -54,6 +54,27 @@ namespace Integrator
             return std::make_tuple(x, v);
         }
     };
+
+    class Verlet
+    {
+    public:
+        std::tuple<vec2, vec2> operator()(
+                const std::tuple<vec2, vec2> &Pos_Vel,
+                const std::function<vec2(Body &leaf, const std::shared_ptr<Node> &root)>& Acc,
+                Body &leaf, const std::shared_ptr<Node> &root, const double dt)
+        {
+            auto [x, v] = Pos_Vel;
+
+            vec2 acc = Acc(leaf, root);
+            x += v * dt + 0.5 * Acc(leaf, root) * dt * dt;
+            leaf.pos = x;
+
+            vec2 acc_new = Acc(leaf, root);
+            v += 0.5 * (acc + acc_new) * dt;
+
+            return std::make_tuple(x, v);
+        }
+    };
 }
 
 #endif //BARNES_HUT_DEMO_NUMERICS_H
