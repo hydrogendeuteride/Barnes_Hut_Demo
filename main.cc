@@ -29,7 +29,6 @@ int main()
     PlummerDistribution(bodies, 1000, 10,
                         SimWidth / 2.0, SimHeight / 2.0);
 
-    //BarnesHutTree tree = BarnesHutTree();
     QuadTree tree = QuadTree();
     const std::shared_ptr<Node> root = tree.GetRoot();
 
@@ -67,8 +66,6 @@ int main()
 #pragma omp parallel for num_threads(omp_get_max_threads())
         for (size_t i = 0; i < bodies.size(); ++i)
         {
-            //tree.CalcMovement(bodies.at(i), 1.0);
-            //tree.BoundaryDetection(bodies.at(i));
             CalcMovement(bodies.at(i), tree.GetRoot(), 1.0);
         }
 
