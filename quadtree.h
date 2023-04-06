@@ -65,6 +65,8 @@ public:
 
     void Reset();
 
+    const std::shared_ptr<Node>& GetRoot();
+
 protected:
     std::shared_ptr<Node> Root;
 };

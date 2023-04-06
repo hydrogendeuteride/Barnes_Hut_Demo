@@ -7,18 +7,10 @@
 #include "constants.h"
 #include <functional>
 
-class BarnesHutTree : public QuadTree
-{
-private:
-    vec2 NetAcceleration(Body &leaf);
+vec2 NetAcceleration(Body &leaf, const std::shared_ptr<Node>& root);
 
-    Acceleration::Gravitational Gravity;
+void BoundaryDetection(Body &body, const std::shared_ptr<Node>& root);
 
-public:
-    void CalcMovement(Body &body, double dt, int Int_type);
-
-    void BoundaryDetection(Body &body);
-};
-
+void CalcMovement(Body &body, const std::shared_ptr<Node>& root, double dt);
 
 #endif //BARNES_HUT_DEMO_BARNES_HUT_H

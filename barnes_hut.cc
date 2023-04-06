@@ -1,11 +1,13 @@
 #include "barnes_hut.h"
 
-vec2 BarnesHutTree::NetAcceleration(Body &leaf)
+vec2 NetAcceleration(Body &leaf, const std::shared_ptr<Node> &root)
 {
+    Acceleration::Gravitational Gravity;
+
     vec2 NetAcc = vec2(0.0, 0.0);
 
     std::stack<std::shared_ptr<Node>> stack;
-    stack.push(Root);
+    stack.push(root);
 
     while (!stack.empty())
     {
@@ -35,46 +37,39 @@ vec2 BarnesHutTree::NetAcceleration(Body &leaf)
     return NetAcc;
 }
 
-void BarnesHutTree::BoundaryDetection(Body &body)
+void BoundaryDetection(Body &body, const std::shared_ptr<Node> &root)
 {
-    if ((body.pos(0) > Root->Width && body.vel(0) > 0) ||
-        (body.pos(0) < 0 && body.vel(0) < 0))
+    if (body.pos(0) > root->Width && body.vel(0) > 0)
+    {
         body.vel(0) = -body.vel(0);
-
-    if ((body.pos(1) > Root->Height && body.vel(1) > 0) ||
-        (body.pos(1) < 0 && body.vel(1) < 0))
+        body.pos(0) = root->Width;
+    }
+    if (body.pos(0) < 0 && body.vel(0) < 0)
+    {
+        body.vel(0) = -body.vel(0);
+        body.pos(0) = 0.0;
+    }
+    if (body.pos(1) > root->Height && body.vel(1) > 0)
+    {
         body.vel(1) = -body.vel(1);
+        body.pos(1) = root->Height;
+    }
+    if (body.pos(1) < 0 && body.vel(1) < 0)
+    {
+        body.vel(1) = -body.vel(1);
+        body.pos(1) = 0.0;
+    }
 }
 
-void BarnesHutTree::CalcMovement(Body &body, double dt, int Int_type)
+void CalcMovement(Body &body, const std::shared_ptr<Node>& root, double dt)
 {
-    if (Int_type = 1)
-    {
-        Integrator::Semi_Implicit_Euler euler;
+    Integrator::Verlet Verlet;
 
-        auto [x, v] =
-                euler(std::make_tuple(body.pos, body.vel),
-                      NetAcceleration(body), dt);
+    auto [x, v] =
+            Verlet(std::make_tuple(body.pos, body.vel),
+                   NetAcceleration, body, root, dt);
 
-        body.pos = x, body.vel = v;
-    }
-    else if (Int_type = 2)
-    {
-        Integrator::Verlet_First first;
-        Integrator::Verlet_Last Last;
+    BoundaryDetection(body, root);
 
-        vec2 accel = NetAcceleration(body);
-        auto [x, v] =
-                first(std::make_tuple(body.pos, body.vel),
-                      NetAcceleration(body), dt);
-
-        body.pos = x, body.vel = v;
-
-        vec2 accel_1 = NetAcceleration(body);
-        auto [x_1, v_1] =
-                Last(std::make_tuple(body.pos, body.vel),
-                     accel + accel_1, dt);
-
-        body.pos = x_1, body.vel = v_1;
-    }
+    body.pos = x, body.vel = v;
 }
