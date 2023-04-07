@@ -55,12 +55,12 @@ namespace Integrator
         }
     };
 
-    class Verlet
+    class Velocity_Verlet
     {
     public:
         std::tuple<vec2, vec2> operator()(
                 const std::tuple<vec2, vec2> &Pos_Vel,
-                const std::function<vec2(Body &leaf, const std::shared_ptr<Node> &root)>& Acc,
+                const std::function<vec2(Body &leaf, const std::shared_ptr<Node> &root)> &Acc,
                 Body &leaf, const std::shared_ptr<Node> &root, const double dt)
         {
             auto [x, v] = Pos_Vel;

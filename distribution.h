@@ -49,8 +49,8 @@ void PlummerDistribution(
         double phi = phi_rand(gen);
 
         double r = rad_max / std::sqrt(std::pow(dist_norm, -0.66666666667) - 1.0);
-        vec2 pos = vec2(r * std::cos(phi) * r + x_center,
-                        r * std::sin(phi) * r + y_center);
+        vec2 pos = vec2(r * std::cos(phi) + x_center,
+                        r * std::sin(phi) + y_center);
 
         double x = 0.1;
         double y;

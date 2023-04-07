@@ -25,8 +25,8 @@ int main()
 {
     std::vector<Body> bodies;
 
-    //DiskDistribution (bodies, 1000, 20000, 50, 1, 2, 1e8);
-    PlummerDistribution(bodies, 1000, 10,
+    //DiskDistribution (bodies, 2000, 20000, 50, 1, 2, 1e8);
+    PlummerDistribution(bodies, 2000, 60,
                         SimWidth / 2.0, SimHeight / 2.0);
 
     QuadTree tree = QuadTree();
@@ -66,7 +66,7 @@ int main()
 #pragma omp parallel for num_threads(omp_get_max_threads())
         for (size_t i = 0; i < bodies.size(); ++i)
         {
-            CalcMovement(bodies.at(i), tree.GetRoot(), 1.0);
+            CalcMovement(bodies.at(i), tree.GetRoot(), 0.5);
         }
 
         auto stop = std::chrono::high_resolution_clock::now();

@@ -63,7 +63,7 @@ void BoundaryDetection(Body &body, const std::shared_ptr<Node> &root)
 
 void CalcMovement(Body &body, const std::shared_ptr<Node>& root, double dt)
 {
-    Integrator::Verlet Verlet;
+    Integrator::Velocity_Verlet Verlet;
 
     auto [x, v] =
             Verlet(std::make_tuple(body.pos, body.vel),
