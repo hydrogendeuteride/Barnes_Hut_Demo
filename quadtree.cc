@@ -90,8 +90,13 @@ void QuadTree::AddNodeIterative(std::vector<Body> &Data, double w, double h)
 
         std::vector<Body> q1, q2, q3, q4;
 
+        q1.reserve(tmp->Data.size() / 2);
+        q2.reserve(tmp->Data.size() / 2);
+        q3.reserve(tmp->Data.size() / 2);
+        q4.reserve(tmp->Data.size() / 2);
 
-        for (auto &body1: tmp->Data)
+
+        for (const auto &body1: tmp->Data)
         {
             if (body1.pos(0, 0) < (tmp->BoxPosX + (tmp->Width / 2.0)))
             {

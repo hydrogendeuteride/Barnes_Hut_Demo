@@ -15,8 +15,8 @@ namespace Acceleration
         {
             double norm = dist.norm();
 
-            return -(GRAVITY_CONST * RootMass)
-                   / (std::pow((norm * norm) + (EPSILON * EPSILON), 1.5)) * dist;
+            return -((GRAVITY_CONST * RootMass)
+                   / (std::pow((norm * norm) + (EPSILON * EPSILON), 1.5))) * dist;
         }
     };
 }

@@ -21,13 +21,21 @@ void postorder(const std::shared_ptr<Node> &Node)
               << " " << Node->Data.size() << std::endl;
 }
 
-int main()
+int main(int argv, char ** argc)
 {
     std::vector<Body> bodies;
 
-    //DiskDistribution (bodies, 2000, 20000, 50, 1, 2, 1e8);
-    PlummerDistribution(bodies, 2000, 60,
-                        SimWidth / 2.0, SimHeight / 2.0);
+    //DiskDistribution (bodies, 1000, 20000,
+      //                50, 1, 2, 1e8);
+    //PlummerDistribution(bodies, 10000, 50,
+      //                  SimWidth / 2.0, SimHeight / 2.0);
+
+
+    /*UnioformDiskDistribution(bodies, 1500, 4000,
+                             SimWidth / 2.0, SimHeight / 2.0, 1e9);
+*/
+    ExpMinusR_Distribution(bodies, 2000, 0.0003,
+                           SimWidth / 2.0, SimHeight / 2.0, 1e9);
 
     QuadTree tree = QuadTree();
     const std::shared_ptr<Node> root = tree.GetRoot();
@@ -66,7 +74,7 @@ int main()
 #pragma omp parallel for num_threads(omp_get_max_threads())
         for (size_t i = 0; i < bodies.size(); ++i)
         {
-            CalcMovement(bodies.at(i), tree.GetRoot(), 0.5);
+            CalcMovement(bodies.at(i), tree.GetRoot(), 0.1);
         }
 
         auto stop = std::chrono::high_resolution_clock::now();

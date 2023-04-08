@@ -71,4 +71,72 @@ void PlummerDistribution(
     }
 }
 
+void UnioformDiskDistribution(
+        std::vector<Body> &bodies, int number, double rad_max,
+        double x_center, double y_center, double centermass
+        )
+{
+    std::random_device rand;
+    std::mt19937 gen(rand());
+    std::uniform_real_distribution<> phi_rand(0.0, 2 * M_PI);
+    std::uniform_real_distribution<> area_rand(0.0, M_PI * rad_max * rad_max);
+
+    bodies.emplace_back(vec2(SimWidth / 2.0, SimHeight / 2.0),
+                        vec2(0.0, 0.0), centermass);
+
+    for (int i = 1; i < number; ++i)
+    {
+        double angle = phi_rand(gen);
+        double area = area_rand(gen);
+        double radius = std::sqrt(area / M_PI);
+
+        vec2 pos = vec2(radius * std::cos(angle) + x_center,
+                        radius * std::sin(angle) + y_center);
+
+
+        double velocity = std::pow(centermass * GRAVITY_CONST / radius, 0.5);
+        double vel_x = std::sin(angle) * velocity;
+        double vel_y = -std::cos(angle) * velocity;
+
+        vec2 vel(vel_x, vel_y);
+        double mass = 1.0;
+        bodies.emplace_back(pos, vel, mass);
+    }
+}
+
+void ExpMinusR_Distribution(
+        std::vector<Body> &bodies, int number, double lambda,
+        double x_center, double y_center, double centermass)
+{
+    std::random_device rand;
+    std::mt19937 gen(rand());
+    std::uniform_real_distribution<> phi_rand(0.0, 2 * M_PI);
+    std::uniform_real_distribution<> r_rand(0.0, 1.0);
+
+    bodies.emplace_back(vec2(SimWidth / 2.0, SimHeight / 2.0),
+                        vec2(0.0, 0.0), centermass);
+
+    for (int i = 0; i < number; ++i)
+    {
+        double angle = phi_rand(gen);
+        double r_sample = r_rand(gen);
+        double radius = -std::log(1.0 - r_sample) / lambda;
+
+        double area = M_PI * radius * radius;
+        double corrected_radius = std::sqrt(area / M_PI) + 100.0;
+
+        vec2 pos = vec2(corrected_radius * std::cos(angle) + x_center,
+                        corrected_radius * std::sin(angle) + y_center);
+
+        double velocity = std::pow(centermass * GRAVITY_CONST / corrected_radius, 0.5);
+        double vel_x = std::sin(angle) * velocity;
+        double vel_y = -std::cos(angle) * velocity;
+
+        vec2 vel(vel_x, vel_y);
+        double mass = 1.0;
+
+        bodies.emplace_back(pos, vel, mass);
+    }
+}
+
 #endif //BARNES_HUT_DEMO_DISTRIBUTION_H

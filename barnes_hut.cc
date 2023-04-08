@@ -37,8 +37,10 @@ vec2 NetAcceleration(Body &leaf, const std::shared_ptr<Node> &root)
     return NetAcc;
 }
 
-void BoundaryDetection(Body &body, const std::shared_ptr<Node> &root)
+bool BoundaryDetection(Body &body, const std::shared_ptr<Node> &root)
 {
+    bool out_of_bounds = false;
+
     if (body.pos(0) > root->Width && body.vel(0) > 0)
     {
         body.vel(0) = -body.vel(0);
@@ -59,6 +61,12 @@ void BoundaryDetection(Body &body, const std::shared_ptr<Node> &root)
         body.vel(1) = -body.vel(1);
         body.pos(1) = 0.0;
     }
+
+    if (body.pos(0) < 0 || body.pos(0) > root->Width ||
+        body.pos(1) < 0 || body.pos(1) > root->Height)
+        out_of_bounds = true;
+
+    return out_of_bounds;
 }
 
 void CalcMovement(Body &body, const std::shared_ptr<Node>& root, double dt)
@@ -69,7 +77,13 @@ void CalcMovement(Body &body, const std::shared_ptr<Node>& root, double dt)
             Verlet(std::make_tuple(body.pos, body.vel),
                    NetAcceleration, body, root, dt);
 
-    BoundaryDetection(body, root);
+    bool out_of_bounds = BoundaryDetection(body, root);
 
-    body.pos = x, body.vel = v;
+    if (out_of_bounds)
+    {
+        x = vec2(root->Width/2 + 50.0, root->Height/2 + 50.0);
+        v = vec2(0.0, .0);
+    }
+
+    body.pos = x, body.vel = v * 0.998;
 }

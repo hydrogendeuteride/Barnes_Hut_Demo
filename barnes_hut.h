@@ -9,7 +9,7 @@
 
 vec2 NetAcceleration(Body &leaf, const std::shared_ptr<Node>& root);
 
-void BoundaryDetection(Body &body, const std::shared_ptr<Node>& root);
+bool BoundaryDetection(Body &body, const std::shared_ptr<Node>& root);
 
 void CalcMovement(Body &body, const std::shared_ptr<Node>& root, double dt);
 
