@@ -32,9 +32,9 @@ int main(int argv, char ** argc)
 
 
     /*UnioformDiskDistribution(bodies, 1500, 4000,
-                             SimWidth / 2.0, SimHeight / 2.0, 1e9);
+                             SimWidth / 2.0, SimHeight / 2.0 1e9);
 */
-    ExpMinusR_Distribution(bodies, 2000, 0.0003,
+    ExpMinusR_Distribution(bodies, 2000, 0.0005, 100.0,
                            SimWidth / 2.0, SimHeight / 2.0, 1e9);
 
     QuadTree tree = QuadTree();
@@ -47,6 +47,8 @@ int main(int argv, char ** argc)
     Event::View view(&window, SimWidth, SimHeight, ViewWidth, ViewHeight);
 
     Object::Particles particles(bodies);
+
+    Integrator::Velocity_Verlet Verlet;
 
     while (window.isOpen())
     {
@@ -74,7 +76,7 @@ int main(int argv, char ** argc)
 #pragma omp parallel for num_threads(omp_get_max_threads())
         for (size_t i = 0; i < bodies.size(); ++i)
         {
-            CalcMovement(bodies.at(i), tree.GetRoot(), 0.1);
+            CalcMovement(bodies.at(i), tree.GetRoot(), 0.998, 0.1, Verlet);
         }
 
         auto stop = std::chrono::high_resolution_clock::now();

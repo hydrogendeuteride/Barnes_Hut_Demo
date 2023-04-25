@@ -71,8 +71,8 @@ void PlummerDistribution(
     }
 }
 
-void UnioformDiskDistribution(
-        std::vector<Body> &bodies, int number, double rad_max,
+void UniformDiskDistribution(
+        std::vector<Body> &bodies, int number, double rad_max, double rad_min,
         double x_center, double y_center, double centermass
         )
 {
@@ -88,7 +88,7 @@ void UnioformDiskDistribution(
     {
         double angle = phi_rand(gen);
         double area = area_rand(gen);
-        double radius = std::sqrt(area / M_PI);
+        double radius = std::sqrt(area / M_PI) + rad_min;
 
         vec2 pos = vec2(radius * std::cos(angle) + x_center,
                         radius * std::sin(angle) + y_center);
@@ -105,7 +105,7 @@ void UnioformDiskDistribution(
 }
 
 void ExpMinusR_Distribution(
-        std::vector<Body> &bodies, int number, double lambda,
+        std::vector<Body> &bodies, int number, double lambda, double rad_min,
         double x_center, double y_center, double centermass)
 {
     std::random_device rand;
@@ -123,7 +123,7 @@ void ExpMinusR_Distribution(
         double radius = -std::log(1.0 - r_sample) / lambda;
 
         double area = M_PI * radius * radius;
-        double corrected_radius = std::sqrt(area / M_PI) + 100.0;
+        double corrected_radius = std::sqrt(area / M_PI) + rad_min;
 
         vec2 pos = vec2(corrected_radius * std::cos(angle) + x_center,
                         corrected_radius * std::sin(angle) + y_center);

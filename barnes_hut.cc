@@ -69,13 +69,11 @@ bool BoundaryDetection(Body &body, const std::shared_ptr<Node> &root)
     return out_of_bounds;
 }
 
-void CalcMovement(Body &body, const std::shared_ptr<Node>& root, double dt)
+void CalcMovement(Body &body, const std::shared_ptr<Node>& root, double damping, double dt, Integrator::IntrgratorBase &Int)
 {
-    Integrator::Velocity_Verlet Verlet;
-
     auto [x, v] =
-            Verlet(std::make_tuple(body.pos, body.vel),
-                   NetAcceleration, body, root, dt);
+            Int(std::make_tuple(body.pos, body.vel),
+                       NetAcceleration, body, root, dt);
 
     bool out_of_bounds = BoundaryDetection(body, root);
 
@@ -85,5 +83,6 @@ void CalcMovement(Body &body, const std::shared_ptr<Node>& root, double dt)
         v = vec2(0.0, .0);
     }
 
-    body.pos = x, body.vel = v * 0.998;
+    body.pos = x;
+    body.vel = v * damping;
 }

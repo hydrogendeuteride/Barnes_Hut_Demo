@@ -8,17 +8,27 @@ typedef Eigen::Vector2d vec2;
 
 namespace Integrator
 {
-    class Semi_Implicit_Euler
+    class IntrgratorBase
+    {
+    public:
+        virtual std::tuple<vec2, vec2> operator()(
+                const std::tuple<vec2, vec2> &Pos_Vel,
+                const std::function<vec2(Body &leaf, const std::shared_ptr<Node> &root)> &Acc,
+                Body &leaf, const std::shared_ptr<Node> &root, double dt) = 0;
+    };
+
+    class Semi_Implicit_Euler : public IntrgratorBase
     {
     public:
         std::tuple<vec2, vec2> operator()(
                 const std::tuple<vec2, vec2> &Pos_Vel,
-                const vec2 &accel, const double dt)
+                const std::function<vec2(Body &leaf, const std::shared_ptr<Node> &root)> &Acc,
+                Body &leaf, const std::shared_ptr<Node> &root, double dt)
         {
             auto [x, v] = Pos_Vel;
             vec2 x_1(0.0, 0.0), v_1(0.0, 0.0);
 
-            v_1 = v + accel * dt;
+            v_1 = v + Acc(leaf, root) * dt;
             x_1 = x + v_1 * dt;
 
             return std::make_tuple(x_1, v_1);
@@ -55,13 +65,13 @@ namespace Integrator
         }
     };
 
-    class Velocity_Verlet
+    class Velocity_Verlet : public IntrgratorBase
     {
     public:
         std::tuple<vec2, vec2> operator()(
                 const std::tuple<vec2, vec2> &Pos_Vel,
                 const std::function<vec2(Body &leaf, const std::shared_ptr<Node> &root)> &Acc,
-                Body &leaf, const std::shared_ptr<Node> &root, const double dt)
+                Body &leaf, const std::shared_ptr<Node> &root, double dt)
         {
             auto [x, v] = Pos_Vel;
 
