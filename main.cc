@@ -21,21 +21,38 @@ void postorder(const std::shared_ptr<Node> &Node)
               << " " << Node->Data.size() << std::endl;
 }
 
-int main(int argv, char ** argc)
+int main(int argv, char **argc) // -num -maxR -minR -centerx -centery -centermass -int_type -distrib_type
 {
+    if (argv < 9)
+    {
+        std::cout << "-num -maxR -minR -centerx -centery -centermass -int_type -distrib_type\n";
+    }
+
+    int Num = std::stoi(argc[1]);
+    double MaxR = std::stod(argc[2]);
+    double MinR = std::stod(argc[3]);
+    double CenterX = std::stod(argc[4]);
+    double CenterY = std::stod(argc[5]);
+    double CenterMass = std::stod(argc[6]);
+    std::string int_type = argc[7], distrib_type = argc[8];
+
     std::vector<Body> bodies;
 
-    //DiskDistribution (bodies, 1000, 20000,
-      //                50, 1, 2, 1e8);
-    //PlummerDistribution(bodies, 10000, 50,
-      //                  SimWidth / 2.0, SimHeight / 2.0);
+    if (distrib_type == "Disk")
+        DiskDistribution(bodies, 1000, 20000,
+                         50, 1, 2, 1e8);
 
+    if (distrib_type == "Plummer")
+        PlummerDistribution(bodies, 1000, 500,
+                            SimWidth / 2.0, SimHeight / 2.0);
 
-    /*UnioformDiskDistribution(bodies, 1500, 4000,
-                             SimWidth / 2.0, SimHeight / 2.0 1e9);
-*/
-    ExpMinusR_Distribution(bodies, 2000, 0.0005, 100.0,
-                           SimWidth / 2.0, SimHeight / 2.0, 1e9);
+    if (distrib_type == "UDisk")
+        UniformDiskDistribution(bodies, 1500, 4000, 100,
+                                SimWidth / 2.0, SimHeight / 2.0, 1e9);
+
+    if (distrib_type == "ExpR")
+        ExpMinusR_Distribution(bodies, 2000, 0.0005, 100.0,
+                               SimWidth / 2.0, SimHeight / 2.0, 1e9);
 
     QuadTree tree = QuadTree();
     const std::shared_ptr<Node> root = tree.GetRoot();

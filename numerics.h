@@ -8,7 +8,7 @@ typedef Eigen::Vector2d vec2;
 
 namespace Integrator
 {
-    class IntrgratorBase
+    class IntrgratorBase    //all integrator should follow this form
     {
     public:
         virtual std::tuple<vec2, vec2> operator()(

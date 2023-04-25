@@ -9,7 +9,7 @@ vec2 NetAcceleration(Body &leaf, const std::shared_ptr<Node> &root)
     std::stack<std::shared_ptr<Node>> stack;
     stack.push(root);
 
-    while (!stack.empty())
+    while (!stack.empty())  //simple DFS, in this case DFS is 50% faster than BFS
     {
         auto tmp = stack.top();
         stack.pop();

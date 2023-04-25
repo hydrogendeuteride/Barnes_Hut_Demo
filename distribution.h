@@ -67,7 +67,7 @@ void PlummerDistribution(
 
         vec2 vel = v * vec2(std::cos(phi_v), std::sin(phi_v));
 
-        bodies.emplace_back(pos, vel, 1.0);
+        bodies.emplace_back(pos, vel, 700.0);
     }
 }
 

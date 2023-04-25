@@ -83,7 +83,7 @@ void QuadTree::AddNodeIterative(std::vector<Body> &Data, double w, double h)
     queue.push(Root);
 
 
-    while (!queue.empty())
+    while (!queue.empty())      //simple BFS
     {
         std::shared_ptr<Node> tmp = queue.front();
         queue.pop();

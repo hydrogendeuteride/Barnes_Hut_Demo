@@ -33,16 +33,20 @@ struct Body
 class Node
 {
 public:
+    //particles in node
     std::vector<Body> Data;
 
+    //quadtree sub nodes
     std::shared_ptr<Node> q1;
     std::shared_ptr<Node> q2;
     std::shared_ptr<Node> q3;
     std::shared_ptr<Node> q4;
 
+    //initialized at node creation
     vec2 CenterOfMass;
     double TotalMass = 0;
 
+    //position, max position
     double Width = 0, Height = 0;
     double BoxPosX = 0, BoxPosY = 0;
 
@@ -52,6 +56,7 @@ public:
 
     Node(std::vector<Body> data, double w, double h, double BoxX, double BoxY);
 
+    //this node contains the body? (O(n))
     bool Contains(const Body &body);
 };
 
@@ -61,8 +66,10 @@ public:
     QuadTree() : Root(nullptr)
     {};
 
+    //tree generation O(log(n))
     void AddNodeIterative(std::vector<Body> &data, double w, double h);
 
+    //tree deletion O(log(n))
     void Reset();
 
     const std::shared_ptr<Node>& GetRoot();
