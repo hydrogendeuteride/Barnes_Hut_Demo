@@ -4,6 +4,7 @@
 #include "barnes_hut.h"
 #include "Drawable.h"
 #include "distribution.h"
+#include "physics.h"
 #include <cmath>
 #include <omp.h>
 
@@ -106,7 +107,8 @@ int main(int argv, char **argc) // -num -maxR -minR -centerx -centery -centermas
         tree.Reset();
 
         window.display();
-        std::cout << "\t" << treegen.count() << "\t" << duration.count() << "\n";
+        std::cout << "\t" << treegen.count() << "\t" << duration.count() << "\t" <<
+                    Virial_Energy(bodies) <<"\n";
     }
 
     return 0;
