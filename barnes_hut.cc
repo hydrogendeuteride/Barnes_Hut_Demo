@@ -69,20 +69,56 @@ bool BoundaryDetection(Body &body, const std::shared_ptr<Node> &root)
     return out_of_bounds;
 }
 
-void CalcMovement(Body &body, const std::shared_ptr<Node>& root, double damping, double dt, Integrator::IntrgratorBase &Int)
+void CalcMovement(Body &body, const std::shared_ptr<Node> &root, double damping, double dt,
+                  Integrator::IntrgratorBase &Int)
 {
     auto [x, v] =
             Int(std::make_tuple(body.pos, body.vel),
-                       NetAcceleration, body, root, dt);
+                NetAcceleration, body, root, dt);
 
     bool out_of_bounds = BoundaryDetection(body, root);
 
     if (out_of_bounds)
     {
-        x = vec2(root->Width/2 + 50.0, root->Height/2 + 50.0);
+        x = vec2(root->Width / 2 + 50.0, root->Height / 2 + 50.0);
         v = vec2(0.0, .0);
     }
 
     body.pos = x;
     body.vel = v * damping;
+}
+
+void DirectMethod(std::vector<Body> &bodies, double damping, double dt,
+                  Integrator::IntrgratorBase &Int)
+//naive calculation for debugging
+{
+    Acceleration::Gravitational Gravity;
+    std::vector<Body> old_state = bodies;
+    std::vector<Body> new_state = bodies;
+
+    for (int i = 0; i < old_state.size(); ++i)
+    {
+        vec2 acc(0.0, 0.0);
+        for (int j = 0; j < old_state.size(); ++j)
+        {
+            if (i != j)
+            {
+                acc += Gravity(old_state[j].mass, old_state[i].pos -  old_state[j].pos);
+            }
+        }
+        new_state[i].pos += new_state[i].vel * dt + 0.5 * acc * dt * dt;
+
+        vec2 acc_new(0.0, 0.0);
+        for (int j = 0; j < old_state.size(); ++j)
+        {
+            if (i != j)
+            {
+                acc_new += Gravity(old_state[j].mass, new_state[i].pos - old_state[j].pos);
+            }
+        }
+
+        new_state[i].vel += 0.5 * (acc + acc_new) * dt;
+    }
+
+    bodies = new_state;
 }

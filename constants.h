@@ -9,8 +9,11 @@ constexpr double ViewHeight = 1080; //main sfml window size
 
 constexpr double THETA = 0.5;   //barnes_hut.h, tree search threshold
 
-constexpr double EPSILON = 5.0; //acceleration.h, force softening
+constexpr double EPSILON = 0.5; //acceleration.h, force softening
+/*
+ * smaller softening value is good for energy conservation
+ */
 
-constexpr double GRAVITY_CONST = 0.5; // acceleration.h, gravity constant
+constexpr double GRAVITY_CONST = 0.1; // acceleration.h, gravity constant
 
 #endif //BARNES_HUT_DEMO_CONSTANTS_H

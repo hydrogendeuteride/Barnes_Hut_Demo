@@ -44,7 +44,7 @@ int main(int argv, char **argc) // -num -maxR -minR -centerx -centery -centermas
                          50, 1, 2, 1e8);
 
     if (distrib_type == "Plummer")
-        PlummerDistribution(bodies, 1000, 500,
+        PlummerDistribution(bodies, 1000, 200,
                             SimWidth / 2.0, SimHeight / 2.0);
 
     if (distrib_type == "UDisk")
@@ -94,8 +94,10 @@ int main(int argv, char **argc) // -num -maxR -minR -centerx -centery -centermas
 #pragma omp parallel for num_threads(omp_get_max_threads())
         for (size_t i = 0; i < bodies.size(); ++i)
         {
-            CalcMovement(bodies.at(i), tree.GetRoot(), 0.998, 0.1, Verlet);
+            CalcMovement(bodies.at(i), tree.GetRoot(), 0.999, 0.1, Verlet);
         }
+
+        //DirectMethod(bodies, 0.999, 0.1, Verlet);
 
         auto stop = std::chrono::high_resolution_clock::now();
         auto duration =
@@ -108,7 +110,7 @@ int main(int argv, char **argc) // -num -maxR -minR -centerx -centery -centermas
 
         window.display();
         std::cout << "\t" << treegen.count() << "\t" << duration.count() << "\t" <<
-                    Virial_Energy(bodies) <<"\n";
+                    Total_Energy(bodies) <<"\n";
     }
 
     return 0;
