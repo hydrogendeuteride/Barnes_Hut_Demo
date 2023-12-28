@@ -4,7 +4,7 @@ project(Barnes_Hut_Demo)
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_FLAGS "-Wall -Wextra")
 set(CMAKE_CXX_FLAGS_DEBUG "-g")
-set(CMAKE_CXX_FLAGS_RELEASE "-O3 -mavx2 -fopenmp")
+set(CMAKE_CXX_FLAGS_RELEASE "-O3 -mavx2 -fopenmp -march=native -mfma -funroll-loops -fprefetch-loop-arrays")
 find_package(Eigen3 3.3 NO_MODULE)
 find_package(SFML 2.5.1 REQUIRED network audio graphics window system)
 

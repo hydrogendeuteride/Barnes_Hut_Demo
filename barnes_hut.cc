@@ -18,20 +18,25 @@ vec2 NetAcceleration(Body &leaf, const std::shared_ptr<Node> &root)
         double Dist = Dist_V.norm();
 
         if (tmp->Width / Dist <= THETA || !tmp->HasLeaf)
+        {
             if (!tmp->Contains(leaf))
                 NetAcc += Gravity(tmp->TotalMass, Dist_V);
+        }
 
-        if (tmp->q1 != nullptr)
-            stack.push(tmp->q1);
+        else
+        {
+            if (tmp->q1 != nullptr)
+                stack.push(tmp->q1);
 
-        if (tmp->q2 != nullptr)
-            stack.push(tmp->q2);
+            if (tmp->q2 != nullptr)
+                stack.push(tmp->q2);
 
-        if (tmp->q3 != nullptr)
-            stack.push(tmp->q3);
+            if (tmp->q3 != nullptr)
+                stack.push(tmp->q3);
 
-        if (tmp->q4 != nullptr)
-            stack.push(tmp->q4);
+            if (tmp->q4 != nullptr)
+                stack.push(tmp->q4);
+        }
     }
 
     return NetAcc;
@@ -103,7 +108,7 @@ void DirectMethod(std::vector<Body> &bodies, double damping, double dt,
         {
             if (i != j)
             {
-                acc += Gravity(old_state[j].mass, old_state[i].pos -  old_state[j].pos);
+                acc += Gravity(old_state[j].mass, old_state[i].pos - old_state[j].pos);
             }
         }
         new_state[i].pos += new_state[i].vel * dt + 0.5 * acc * dt * dt;
