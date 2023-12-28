@@ -1,6 +1,10 @@
 #ifndef BARNES_HUT_DEMO_DISTRIBUTION_H
 #define BARNES_HUT_DEMO_DISTRIBUTION_H
 
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
+
 void DiskDistribution(
         std::vector<Body> &bodies, int number, double rad_max, double rad_min,
         double mass_min, double mass_max, double centermass)

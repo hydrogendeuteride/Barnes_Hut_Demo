@@ -68,16 +68,16 @@ namespace Event
 
             if (event->type == sf::Event::KeyPressed)
             {
-                if (event->key.code == sf::Keyboard::Left)
+                if (event->key.code == sf::Keyboard::Left || event->key.code == sf::Keyboard::A)
                     view.move(-15 * zoom, 0);
 
-                if (event->key.code == sf::Keyboard::Right)
+                if (event->key.code == sf::Keyboard::Right || event->key.code == sf::Keyboard::D)
                     view.move(15 * zoom, 0);
 
-                if (event->key.code == sf::Keyboard::Up)
+                if (event->key.code == sf::Keyboard::Up || event->key.code == sf::Keyboard::W)
                     view.move(0, -15 * zoom);
 
-                if (event->key.code == sf::Keyboard::Down)
+                if (event->key.code == sf::Keyboard::Down || event->key.code == sf::Keyboard::S)
                     view.move(0, 15 * zoom);
             }
 

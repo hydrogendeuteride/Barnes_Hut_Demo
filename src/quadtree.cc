@@ -1,4 +1,4 @@
-#include "quadtree.h"
+#include "../include/quadtree.h"
 
 
 Node::Node(std::vector<Body> Data, double w, double h)

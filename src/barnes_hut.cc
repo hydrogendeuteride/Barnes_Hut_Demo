@@ -1,4 +1,4 @@
-#include "barnes_hut.h"
+#include "../include/barnes_hut.h"
 
 vec2 NetAcceleration(Body &leaf, const std::shared_ptr<Node> &root)
 {
