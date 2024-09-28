@@ -44,7 +44,7 @@ int main(int argv, char **argc) // -num -maxR -minR -centerx -centery -centermas
                          50, 1, 2, 1e8);
 
     if (distrib_type == "Plummer")
-        PlummerDistribution(bodies, 1000, 400,
+        PlummerDistribution(bodies, 5000, 400,
                             SimWidth / 2.0, SimHeight / 2.0);
 
     if (distrib_type == "UDisk")
@@ -92,7 +92,7 @@ int main(int argv, char **argc) // -num -maxR -minR -centerx -centery -centermas
                 std::chrono::duration_cast<std::chrono::milliseconds>(middle - start);
 
 #pragma omp parallel for num_threads(omp_get_max_threads()) schedule(static, 100)
-        for (size_t i = 0; i < bodies.size(); ++i)
+        for (int i = 0; i < bodies.size(); ++i)
         {
             CalcMovement(bodies.at(i), tree.GetRoot(), 0.999, 0.1, Verlet);
         }
